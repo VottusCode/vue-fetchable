@@ -44,7 +44,7 @@ export class BackendFetchError extends Error {
  * The default instance of Axios,
  * created on page load.
  */
-const instance = createAxios();
+export const axiosInstance = createAxios();
 
 /**
  * Axios Request Function Wrapper
@@ -61,9 +61,9 @@ export const request = async <
 >(
   config: AxiosRequestConfig
 ): Promise<AxiosResponse<SuccessResponse<R>>> => {
-  const request = await instance.request<SuccessResponse<R> | ErrorResponse<E>>(
-    config
-  );
+  const request = await axiosInstance.request<
+    SuccessResponse<R> | ErrorResponse<E>
+  >(config);
 
   if (!request.data.success) {
     throw new BackendFetchError(request.data.error, request);
@@ -158,4 +158,4 @@ export const hookFetch = <TData extends unknown>(
   return data;
 };
 
-export default instance;
+export default axiosInstance;
