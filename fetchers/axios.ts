@@ -44,7 +44,8 @@ export class BackendFetchError extends Error {
  * The default instance of Axios,
  * created on page load.
  */
-export const axiosInstance = createAxios();
+export const axiosInstance =
+  ((window as any).$axios as AxiosInstance) ?? createAxios();
 
 /**
  * Axios Request Function Wrapper
