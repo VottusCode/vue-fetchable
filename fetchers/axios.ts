@@ -127,6 +127,7 @@ export const hookFetch = <TData extends unknown>(
   data: UnwrapRef<TData> | null;
   request: () => Promise<unknown>;
   fetch: FetchableState;
+  err: BackendFetchError | null;
 } => {
   const data = reactiveFetch({
     data: null as TData | null,
